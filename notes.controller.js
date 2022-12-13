@@ -33,5 +33,5 @@ async function printNotes (){
     })
 }
 module.exports={
-    addNote, printNotes, remove
+    addNote, getNotes
 }
