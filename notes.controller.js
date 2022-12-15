@@ -14,7 +14,7 @@ async function addNote (title) {
    await fs.writeFile(notesPath, JSON.stringify(notes))
     console.log(chalk.green.inverse('Note was added!'))
 }
-async function remove(id){
+async function removeNotes(id){
     const notes = await getNotes();
     const newNotes = notes.filter((n)=> n.id != id);
     await fs.writeFile(notesPath, JSON.stringify(newNotes))
@@ -33,5 +33,5 @@ async function printNotes (){
     })
 }
 module.exports={
-    addNote, getNotes
+    addNote, getNotes, removeNotes
 }
