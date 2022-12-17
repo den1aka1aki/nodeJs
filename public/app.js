@@ -1,15 +1,20 @@
-document.addEventListener('click', event => {
- if(event.target.dataset.type === 'remove'){
-     const id = event.target.dataset.id
-    remove(id).then (() => event.target.closest('li').remove())
- } else if (event.target.dataset.type === 'edit'){
-     const id = event.target.dataset.id;
-     const title = event.target.parentNode.parentNode.childNodes[0].textContent.trim();
-     console.log(title)
-     const value = prompt("Edit", title);
-     edit(id, value).then(() => {
-         event.target.parentNode.parentNode.childNodes[0].textContent = value;
-     });
+document.addEventListener('click', ({target}) => {
+ if(target.dataset.type === 'remove'){
+     const id = target.dataset.id
+    remove(id).then (() => target.closest('li').remove())
+ } else if (target.dataset.type === 'edit'){
+     const id = target.dataset.id;
+     const title = target.parentNode.parentNode.childNodes[0].textContent.trim();
+     const newTitle = prompt("Edit", title);
+     if(newTitle === null){
+         return null;
+     }
+     else {
+         edit(id, newTitle).then(() => {
+             target.parentNode.parentNode.childNodes[0].textContent = newTitle ;
+         });
+     }
+
  }
 })
 
