@@ -32,6 +32,20 @@ async function printNotes (){
         console.log(chalk.blue(note.id + ' ' + note.title))
     })
 }
+async function editNotes (id, payload){
+    const notes = await getNotes();
+    const newTitleNotes = notes.map((n)=>{
+        if (n.id === id){
+            return {
+                title: payload,
+                id: id
+            };
+        }else {
+            return n;
+        }
+    })
+    await fs.writeFile(notesPath, JSON.stringify(newTitleNotes))
+}
 module.exports={
-    addNote, getNotes, removeNotes
+    addNote, getNotes, removeNotes, editNotes
 }
